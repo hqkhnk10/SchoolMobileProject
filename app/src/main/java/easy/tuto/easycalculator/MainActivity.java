@@ -65,28 +65,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         MaterialButton button =(MaterialButton) view;
         String buttonText = button.getText().toString();
         String dataToCalculate = solutionTv.getText().toString();
+        String finalResult = getResult(dataToCalculate);
 
-        if(buttonText.equals("AC")){
+        if(buttonText.equals("CE")){
             solutionTv.setText("");
             resultTv.setText("0");
             return;
         }
         if(buttonText.equals("=")){
+            if(!finalResult.equals("Err")){
+                resultTv.setText(finalResult);
+            }
             solutionTv.setText(resultTv.getText());
             return;
         }
         if(buttonText.equals("C")){
+            if(dataToCalculate.length() == 0){
+                return;
+            }
             dataToCalculate = dataToCalculate.substring(0,dataToCalculate.length()-1);
         }else{
             dataToCalculate = dataToCalculate+buttonText;
         }
         solutionTv.setText(dataToCalculate);
 
-        String finalResult = getResult(dataToCalculate);
 
-        if(!finalResult.equals("Err")){
-            resultTv.setText(finalResult);
-        }
 
     }
 
